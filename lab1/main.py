@@ -48,26 +48,25 @@ def meth_fibo(f, a, b, eps):
     while (b0 - a0) / eps >= fibo(n + 2):
         n += 1
 
-    x1 = a0 + fibo(n) / fibo(n + 2) * (b0 - a0)
-    x2 = a0 + fibo(n + 1) / fibo(n + 2) * (b0 - a0)
 
     k = 1
     while k < n:
+        x1 = a + fibo(n - k) / fibo(n - k + 2) * (b - a)
+        x2 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
+
+        if f(x1) > f(x2):
+            a = x1
+        else:
+            b = x2
+
         k += 1
 
-        x1 = a + fibo(n - k + 1) / fibo(n + 2) * (b0 - a0)
-        x2 = a + fibo(n - k + 2) / fibo(n + 2) * (b0 - a0)
-
-        if f(x1) < f(x2):
-            b = x2
-        else:
-            a = x1
-
-    return a + fibo(1) / fibo(n + 2) * (b0 - a0)
+    return x1
 
 
 if __name__ == '__main__':
     eps = 0.000001
+
     print(f'Метод дихотомии: x = {dihiotomia(f, a, b, eps)}')
     print(f'Метод золотого сечения: x = {golden_section(f, a, b, eps)}')
     print(f'Метод Фибоначчи: x = {meth_fibo(f, a, b, eps)}')

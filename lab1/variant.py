@@ -1,7 +1,7 @@
-from math import sin, pi
+from math import cos, pi
 
-a, b = -pi / 2, pi / 2
+a, b = 0, pi
 
 
 def f(x):
-    return sin(x)
+    return cos(x)

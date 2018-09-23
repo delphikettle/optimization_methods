@@ -5,9 +5,13 @@ _fibos = {
 
 
 def fibo(n):
-    try:
-        return _fibos[n]
-    except KeyError:
-        val = fibo(n - 1) + fibo(n - 2)
-        _fibos[n] = val
-        return val
+    if n not in _fibos:
+        i = n
+        while not (i in _fibos):
+            i -= 1
+
+        while i < n:
+            _fibos[i + 1] = _fibos[i] + _fibos[i - 1]
+            i += 1
+
+    return _fibos[n]
