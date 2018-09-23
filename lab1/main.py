@@ -24,21 +24,24 @@ def dihiotomia(f, a, b, eps):
             print(f'{it_no} iterations: a={a}, b={b}, res={(b - a) / 2}')
             delta_factor *= 2
 
-    return (b - a) / 2
+    return (b + a) / 2
 
 
-k0, k1 = (3 - sqrt(5)) / 2, (sqrt(5) - 1) / 2
+phi = (1 + sqrt(5)) / 2
 
 
 def golden_section(f, a, b, eps):
-    while b - a >= eps:
-        x0 = a + k0 * (b - a)
-        x1 = a + k1 * (b - a)
+    while b - a > eps:
+        t = (b - a) / phi
+        x0 = b - t
+        x1 = a + t
+
         if f(x0) < f(x1):
             b = x1
         else:
             a = x0
-    return (b - a) / 2
+
+    return (b + a) / 2
 
 
 def meth_fibo(f, a, b, eps):
@@ -48,8 +51,7 @@ def meth_fibo(f, a, b, eps):
     while (b0 - a0) / eps >= fibo(n + 2):
         n += 1
 
-
-    k = 1
+    k = 0
     while k < n:
         x1 = a + fibo(n - k) / fibo(n - k + 2) * (b - a)
         x2 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
@@ -65,7 +67,7 @@ def meth_fibo(f, a, b, eps):
 
 
 if __name__ == '__main__':
-    eps = 0.000001
+    eps = 0.00000000000001
 
     print(f'Метод дихотомии: x = {dihiotomia(f, a, b, eps)}')
     print(f'Метод золотого сечения: x = {golden_section(f, a, b, eps)}')
