@@ -52,14 +52,23 @@ def meth_fibo(f, a, b, eps):
         n += 1
 
     k = 0
-    while k < n:
-        x1 = a + fibo(n - k) / fibo(n - k + 2) * (b - a)
-        x2 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
 
-        if f(x1) > f(x2):
+    x1 = a + fibo(n - k) / fibo(n - k + 2) * (b - a)
+    x2 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
+    f1, f2 = f(x1), f(x2)
+    while k < n:
+        if f1 > f2:
             a = x1
+            x1 = x2
+            f1 = f2
+            x2 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
+            f2 = f(x2)
         else:
             b = x2
+            x2 = x1
+            f2 = f1
+            x1 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
+            f1 = f(x1)
 
         k += 1
 
