@@ -13,5 +13,4 @@ def fibo(n):
         while i < n:
             _fibos[i + 1] = _fibos[i] + _fibos[i - 1]
             i += 1
-
     return _fibos[n]
