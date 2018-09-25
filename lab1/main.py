@@ -51,34 +51,35 @@ def golden_section(f, a, b, eps):
 
 def meth_fibo(f, a, b, eps):
     it_no = 0
-    # get n
-    n = 1
-    while abs(b - a) / eps > fibo(n):
+    n = 3
+    while abs(b - a) / eps >= fibo(n):
         n += 1
 
-    k = 0
-
-    x1 = a + fibo(n - k) / fibo(n - k + 2) * (b - a)
-    x2 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
+    a0, b0 = a, b
+    x1 = a + fibo(n - 2) / fibo(n) * (b0 - a0)
+    x2 = a + fibo(n - 1) / fibo(n) * (b0 - a0)
     f1, f2 = f(x1), f(x2)
-    while k < n:
+
+    while n > 2:
+        n -= 1
         if f1 > f2:
             a = x1
             x1 = x2
             f1 = f2
-            x2 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
+            x2 = a + fibo(n - 1) / fibo(n) * (b0 - a0)
             f2 = f(x2)
         else:
             b = x2
             x2 = x1
             f2 = f1
-            x1 = a + fibo(n - k + 1) / fibo(n - k + 2) * (b - a)
+            x1 = a + fibo(n - 2) / fibo(n) * (b0 - a0)
             f1 = f(x1)
-
-        k += 1
         it_no += 1
 
-    return (x1, it_no)
+        if it_no > 5000:
+            break
+
+    return (x1 + x2) / 2, it_no
 
 
 def linear_min(f, eps):
@@ -102,7 +103,7 @@ def linear_min(f, eps):
 
 
 if __name__ == '__main__':
-    eps = 0.00001
+    eps = 0.01
 
     print(f'Метод дихотомии: x = {dihiotomia(f, a, b, eps)}')
     print(f'Метод золотого сечения: x = {golden_section(f, a, b, eps)}')
