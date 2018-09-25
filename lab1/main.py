@@ -6,12 +6,11 @@ from lab1.variant import f, a, b
 
 def dihiotomia(f, a, b, eps):
     it_no = 0
-    delta_factor = 0.1 * 16
 
     while b - a >= eps:
         it_no += 1
 
-        delta = eps / (2 + delta_factor)
+        delta = eps / 2.25
         x0 = (b + a) / 2 - delta
         x1 = (b + a) / 2 + delta
 
@@ -19,10 +18,6 @@ def dihiotomia(f, a, b, eps):
             b = x1
         else:
             a = x0
-
-        if not it_no % 1000:
-            print(f'{it_no} iterations: a={a}, b={b}, res={(b - a) / 2}')
-            delta_factor *= 2
 
     return (b + a) / 2
 
@@ -73,6 +68,12 @@ def meth_fibo(f, a, b, eps):
         k += 1
 
     return x1
+
+
+def linear_min(f, eps):
+    x0 = 0
+    h = eps
+
 
 
 if __name__ == '__main__':
