@@ -72,7 +72,22 @@ def meth_fibo(f, a, b, eps):
 
 def linear_min(f, eps):
     x0 = 0
-    h = eps
+    prev = x0
+
+    if f(x0) <= f(x0 + eps):
+        h = eps
+    else:
+        h = -eps
+
+    x1 = x0 + h
+    f0, f1 = f(x0), f(x1)
+
+    while f1 <= f0:
+        h *= 2
+        prev, x0, x1 = x0, x1, x0 + h
+        f0, f1 = f1, f(x1)
+
+    return meth_fibo(f, prev, x1, eps)
 
 
 
@@ -81,4 +96,5 @@ if __name__ == '__main__':
 
     print(f'Метод дихотомии: x = {dihiotomia(f, a, b, eps)}')
     print(f'Метод золотого сечения: x = {golden_section(f, a, b, eps)}')
-    print(f'Метод Фибоначчи: x = {meth_fibo(f, a, b, eps)}')
+    print(f'Метод Фибоначчи: x = {meth_fibo(f,a, b, eps)}')
+    print(f'Метод поиска на прямой: x = {linear_min(f, eps)}')
