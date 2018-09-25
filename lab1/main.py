@@ -53,8 +53,7 @@ def meth_fibo(f, a, b, eps):
     it_no = 0
     # get n
     n = 1
-
-    while abs(b - a) / eps < fibo(n):
+    while abs(b - a) / eps > fibo(n):
         n += 1
 
     k = 0
