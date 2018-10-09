@@ -1,7 +1,7 @@
 from math import sqrt
 
-from fibo import fibo
-from variant import f, a, b
+from lab1.fibo import fibo
+from lab1.variant import f, a, b
 
 
 def dihiotomia(f, a, b, eps):
@@ -107,7 +107,7 @@ def linear_search(f, eps):
         x0 = x1
         x1 = x2
         x2 += h
-    return meth_fibo(f, x0, x2, eps)
+    return x0, x2
 
 
 if __name__ == '__main__':
@@ -116,4 +116,4 @@ if __name__ == '__main__':
     print(f'Метод дихотомии: x = {dihiotomia(f, a, b, eps)}')
     print(f'Метод золотого сечения: x = {golden_section(f, a, b, eps)}')
     print(f'Метод Фибоначчи: x = {meth_fibo(f, a, b, eps)}')
-    print(f'Метод линейный: x = {linear_search(f, eps)}')
+    print(f'Метод линейный: x = {golden_section(f, *linear_search(f,eps), eps)}')
